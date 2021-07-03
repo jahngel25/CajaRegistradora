@@ -24,3 +24,4 @@ Route::post('cargarBaseCaja', [ApiController::class, 'loadBoxBase']);
 Route::post('vaciarCaja', [ApiController::class, 'emptyBox']);
 Route::get('estadoCaja', [ApiController::class, 'boxBaseForTypeMoney']);
 Route::post('realizarPago', [ApiController::class, 'paymentsRegister']);
+Route::get('verRegistrosCaja', [ApiController::class, 'viewBoxBase']);

@@ -75,4 +75,18 @@ class BaseMoneyController extends Controller
             return "El proceso fallo";
         }
     }
+
+    /**
+     *Retorna todos los registro y movimientos de la caja registradora
+     * desarrollador: daniel angel
+     * fecha creacion: 03/07/2021
+     */
+    public function viewBoxBase(){
+        try{
+            return $this->repository->viewBoxBase();             
+        }catch(Exception $ex){
+            Log::error('Error en el metodo viewBoxBase de la clase BaseMoneyController = '+$ex);
+            return "El proceso fallo";
+        }
+    }
 }

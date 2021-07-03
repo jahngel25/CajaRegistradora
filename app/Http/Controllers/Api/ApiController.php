@@ -73,5 +73,17 @@ class ApiController extends Controller
             'res' => $result
         ], 200);
     }
+
+    /**
+     * Metodo que retorna todos movimientos de la caja registradora
+     * desarrollador: daniel angel
+     * fecha creacion: 03/07/2021
+     */
+    public function viewBoxBase(){
+        $result = $this->baseMoneyController->viewBoxBase();
+        return response()->json([
+            'res' => $result
+        ], 200);
+    }
         
 }

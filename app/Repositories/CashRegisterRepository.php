@@ -103,6 +103,11 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
         }   
     }
 
+    /**
+     *Actualiza el dinero se dio de cambio en la compra
+     * desarrollador: daniel angel
+     * fecha creacion: 03/07/2021
+     */
     public function updateBaseMoney($value)
     {
         try{
@@ -126,10 +131,29 @@ class CashRegisterRepository implements CashRegisterRepositoryInterface
             dd($ex);
             Log::error("Error en el metodo updateBaseMoney de la clase CashRegisterRepository = "+$ex);
             return $ex;
-        }        
-        
-        
-        
+        }                                
+    }
+
+     /**
+     *Retorna todos los registro y movimientos de la caja registradora
+     * desarrollador: daniel angel
+     * fecha creacion: 03/07/2021
+     */
+    public function viewBoxBase(){
+        try{
+            return $this->model
+            ->select('base_money.id','denomination_money.value','base_money.created_at','base_money.updated_at',
+                DB::raw('(CASE WHEN base_money.action_type = 1 THEN "Recarga" WHEN base_money.action_type = 2 THEN "Retiro" ELSE 0 END) AS Event')
+                )
+            ->join('denomination_money', 'denomination_money.id','=','base_money.id_denomination_money')
+            ->join('type_money', 'type_money.id','=','denomination_money.id_type')
+            ->get()
+            ->toArray();
+            
+        }catch(Exception $ex){
+            Log::error("Error en el metodo viewBoxBase de la clase CashRegisterRepository = "+$ex);
+            return $ex;
+        }
     }
    
 }
